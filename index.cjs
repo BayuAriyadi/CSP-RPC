@@ -29,6 +29,7 @@ function createWindow() {
         frame: false,
         resizable: false,
         fullscreenable: false,
+        icon: path.join(__dirname, "assets", "icon.png"),
         webPreferences: {
             preload: path.join(__dirname, "renderer.js"),
             contextIsolation: false,

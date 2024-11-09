@@ -1,10 +1,10 @@
 {
-    "name": "csp-discord",
-    "version": "1.2.0",
+    "name": "csp-rpc",
+    "version": "1.0.0",
     "description": "Clip Studio Paint Rich Presence",
     "main": "index.cjs",
     "license": "MIT",
-    "homepage": "https://github.com/Pepijn98/CSP-Discord#readme",
+    "homepage": "https://github.com/BayuAriyadi/CSP-RPC#readme",
     "engines": {
         "node": ">=18"
     },
@@ -12,19 +12,19 @@
     "type": "commonjs",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Pepijn98/CSP-Discord.git"
+        "url": "git+https://github.com/BayuAriyadi/CSP-RPC.git"
     },
     "bugs": {
-        "url": "https://github.com/Pepijn98/CSP-Discord/issues"
+        "url": "https://github.com/BayuAriyadi/CSP-RPC/issues"
     },
-    "author": "Pepijn van den Broek <pepijn@vdbroek.dev> (https://vdbroek.dev/)",
+    "author": "Pujin Studio a.k.a Fuujin (https://pujin.my.id/)",
     "scripts": {
         "start": "electron .",
         "build": "electron-builder"
     },
     "build": {
-        "appId": "com.yourapp.richpresence",
-        "productName": "Discord Rich Presence Configurator",
+        "appId": "id.my.pujin.csp-rpc",
+        "productName": "CSP RPC",
         "win": {
             "target": "nsis"
         }

@@ -1,6 +1,7 @@
 const { ipcRenderer, shell  } = require("electron");
 
-const githubLink = document.getElementById('githubLink');
+const githubLink = document.getElementById("githubLink");
+
 
 
 // Fungsi untuk memperbarui aktivitas Discord
@@ -10,9 +11,9 @@ document.getElementById("updateBtn").addEventListener("click", () => {
     ipcRenderer.send("update-discord-activity", { details, state });
 });
 
-githubLink.addEventListener('click', (event) => {
+githubLink.addEventListener("click", (event) => {
     event.preventDefault(); // Mencegah link terbuka di dalam aplikasi
-    shell.openExternal('https://github.com/BayuAriyadi'); // Ganti dengan URL GitHub Anda
+    shell.openExternal("https://github.com/BayuAriyadi"); // Ganti dengan URL GitHub Anda
 });
 
 // Tombol Minimize, Close, dan Maximize
