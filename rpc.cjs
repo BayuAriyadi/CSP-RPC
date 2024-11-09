@@ -47,9 +47,7 @@ function setActivity(details = currentDetails, state = currentState) {
                 { label: "Twitter", url: "https://twitter.com/Fuujinnn_" },
             ],
             instance: true,
-        })
-        .then(() => console.log("Activity updated:", details, state))
-        .catch((error) => console.error("Activity update error:", error));
+        }).then(() => console.log("Activity updated:", details, state)).catch((error) => console.error("Activity update error:", error));
     } else {
         console.log("CSP is not running. Skipping setActivity.");
     }
