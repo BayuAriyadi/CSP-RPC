@@ -20,7 +20,8 @@
     "author": "Pujin Studio a.k.a Fuujin (https://pujin.my.id/)",
     "scripts": {
         "start": "electron .",
-        "build": "electron-builder"
+        "build": "electron-builder",
+        "release": "electron-builder --publish always"
     },
     "build": {
         "appId": "id.my.pujin.csp-rpc",
@@ -56,7 +57,14 @@
             "installerIcon": "assets/icon.ico",
             "uninstallerIcon": "assets/icon.ico",
             "deleteAppDataOnUninstall": true
-        }
+        },
+        "publish": [
+            {
+                "provider": "github",
+                "owner": "BayuAriyadi",
+                "repo": "CSP-RPC"
+            }
+        ]
     },
     "dependencies": {
         "auto-launch": "^5.0.6",

@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, Tray, Menu } = require("electron");
+const { app, BrowserWindow, ipcMain, Tray, Menu, dialog } = require("electron");
 const { fork } = require("child_process");
 const path = require("path");
 
@@ -53,13 +53,6 @@ function createWindow() {
             mainWindow.hide();
         }
     });
-
-    // Muat status terakhir dan kirim ke renderer process
-    const lastDetails = Store.get("details") || "🎨 Sedang Memasak..";
-    const lastState = Store.get("state") || "Twitter : @Fuujinnn_";
-    mainWindow.webContents.on("did-finish-load", () => {
-        mainWindow.webContents.send("load-status", { details: lastDetails, state: lastState });
-    });
 }
 
 // Fungsi untuk membuat tray icon
@@ -80,31 +73,35 @@ function createTray() {
     });
 }
 
-// Mengatur Auto Start saat login di Windows
+// Mengatur Auto Start saat login di Windows dengan argumen `--hidden`
 function setAutoStart() {
     app.setLoginItemSettings({
         openAtLogin: true,
-        path: process.execPath, // Jalankan aplikasi dari executable yang benar
+        path: process.execPath,
+        args: ["--hidden"]
     });
 }
 
 app.whenReady().then(async () => {
-    // Inisialisasi electron-store dan atur status penggunaan pertama kali
     await initializeStore();
     const isFirstUse = !Store.get("hasRunBefore");
 
-    if (isFirstUse) {
-        Store.set("hasRunBefore", true); // Tandai bahwa aplikasi telah digunakan
-        createWindow();
-        mainWindow.show(); // Tampilkan jendela pada penggunaan pertama kali
-    } else {
-        createWindow();
-        mainWindow.hide(); // Sembunyikan jendela dan mulai di system tray
-    }
+    const isHidden = app.commandLine.hasSwitch("hidden");
 
     createTray();
-    startRPCProcess(); // Mulai proses RPC
-    setAutoStart(); // Set aplikasi untuk auto start pada login
+    createWindow();
+
+    if (isFirstUse) {
+        Store.set("hasRunBefore", true);
+        mainWindow.show();
+    } else if (isHidden) {
+        mainWindow.hide();
+    } else {
+        mainWindow.show();
+    }
+
+    startRPCProcess();
+    setAutoStart();
 
     app.on("activate", () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow();
@@ -118,15 +115,25 @@ app.on("window-all-closed", () => {
 // Menerima pesan dari renderer process untuk memperbarui aktivitas Discord dan menyimpan data
 ipcMain.on("update-discord-activity", (event, { details, state }) => {
     if (rpcProcess) {
-        // Simpan status details dan state ke electron-store
         Store.set("details", details);
         Store.set("state", state);
-
-        // Kirim data ke child process
         rpcProcess.send({ details, state });
     } else {
         console.error("RPC process is not initialized");
     }
+});
+
+// Konfirmasi sebelum menutup aplikasi dari renderer
+ipcMain.handle("confirm-close", async () => {
+    const choice = await dialog.showMessageBox(mainWindow, {
+        type: "question",
+        buttons: ["Yes", "No"],
+        title: "Confirm Exit",
+        message: "Are you sure you want to quit?",
+        defaultId: 1,
+        cancelId: 1
+    });
+    return choice.response === 0; // "Yes" adalah 0, "No" adalah 1
 });
 
 // Mengatur minimize, close, dan maximize

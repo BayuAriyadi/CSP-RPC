@@ -1,8 +1,6 @@
-const { ipcRenderer, shell  } = require("electron");
+const { ipcRenderer, shell } = require("electron");
 
 const githubLink = document.getElementById("githubLink");
-
-
 
 // Fungsi untuk memperbarui aktivitas Discord
 document.getElementById("updateBtn").addEventListener("click", () => {
@@ -21,8 +19,12 @@ document.getElementById("minimizeBtn").addEventListener("click", () => {
     ipcRenderer.send("window-control", "minimize");
 });
 
-document.getElementById("closeBtn").addEventListener("click", () => {
-    ipcRenderer.send("window-control", "close");
+document.getElementById("closeBtn").addEventListener("click", async () => {
+    // Meminta konfirmasi sebelum menutup
+    const shouldClose = await ipcRenderer.invoke("confirm-close");
+    if (shouldClose) {
+        ipcRenderer.send("window-control", "close");
+    }
 });
 
 document.getElementById("maximizeBtn").addEventListener("click", () => {
