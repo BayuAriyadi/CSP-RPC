@@ -17,7 +17,7 @@
     "bugs": {
         "url": "https://github.com/BayuAriyadi/CSP-RPC/issues"
     },
-    "author": "Pujin Studio a.k.a Fuujin (https://pujin.my.id/)",
+    "author": "Pujin Studio (https://pujin.my.id/)",
     "scripts": {
         "start": "electron .",
         "build": "electron-builder",
