@@ -49,7 +49,8 @@
         ],
         "win": {
             "target": "nsis",
-            "icon": "assets/icon.ico"
+            "icon": "assets/icon.ico",
+            "certificateSubjectName": "Pujin Studio"
         },
         "nsis": {
             "oneClick": false,
