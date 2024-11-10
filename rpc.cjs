@@ -22,10 +22,14 @@ function saveData(details, state) {
 
 // Fungsi untuk memuat `details` dan `state` dari file JSON
 function loadData() {
-    if (fs.existsSync(dataFilePath)) {
-        const data = JSON.parse(fs.readFileSync(dataFilePath));
-        console.log("Data loaded:", data);
-        return { details: data.details, state: data.state };
+    try {
+        if (fs.existsSync(dataFilePath)) {
+            const data = JSON.parse(fs.readFileSync(dataFilePath));
+            console.log("Data loaded:", data);
+            return { details: data.details, state: data.state };
+        }
+    } catch (error) {
+        console.error("Error loading data:", error);
     }
     return { details: "🎨 Sedang Memasak..", state: "Twitter : @Fuujinnn_" };
 }
@@ -43,9 +47,6 @@ function setActivity(details = currentDetails, state = currentState) {
             startTimestamp: Date.now(),
             largeImageKey: "large_logo",
             largeImageText: "Clip Studio Paint",
-            buttons: [
-                { label: "Twitter", url: "https://twitter.com/Fuujinnn_" },
-            ],
             instance: true,
         }).then(() => console.log("Activity updated:", details, state)).catch((error) => console.error("Activity update error:", error));
     } else {
@@ -60,13 +61,17 @@ async function forceClearActivity() {
         console.log("RPC activity cleared successfully");
     } catch (error) {
         console.error("Failed to clear RPC activity:", error);
-        setTimeout(forceClearActivity, 1000); // Coba lagi setelah 1 detik
+        setTimeout(forceClearActivity, 5000); // Coba lagi setelah 5 detik
     }
 }
 
 // Fungsi untuk memeriksa proses CSP secara berkala sebagai alternatif
 function checkCspProcess() {
     exec("tasklist", (err, stdout) => {
+        if (err) {
+            console.error("Error checking processes:", err);
+            return;
+        }
         if (stdout.includes("CLIPStudioPaint.exe")) {
             if (!isCspRunning) {
                 console.log("CSP opened - Setting Discord activity");
@@ -77,7 +82,7 @@ function checkCspProcess() {
             if (isCspRunning) {
                 console.log("CSP closed - Clearing Discord activity");
                 isCspRunning = false;
-                forceClearActivity(); // Panggil `forceClearActivity()` untuk memastikan RPC dihapus
+                forceClearActivity();
             }
         }
     });

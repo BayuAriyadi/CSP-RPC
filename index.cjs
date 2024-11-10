@@ -19,6 +19,9 @@ function startRPCProcess() {
     rpcProcess.on("error", (err) => {
         console.error("RPC process error:", err);
     });
+    rpcProcess.on("exit", (code) => {
+        console.log("RPC process exited with code:", code);
+    });
 }
 
 // Fungsi untuk membuat jendela utama
@@ -61,7 +64,7 @@ function createWindow() {
 
 // Fungsi untuk membuat tray icon
 function createTray() {
-    tray = new Tray(path.join(__dirname, "assets", "tray-icon.png")); // Path ikon
+    tray = new Tray(path.join(__dirname, "assets", "tray-icon.png"));
     const contextMenu = Menu.buildFromTemplate([
         { label: "Show App", click: () => mainWindow.show() },
         { label: "Quit", click: () => {
@@ -81,7 +84,7 @@ function createTray() {
 function setAutoStart() {
     app.setLoginItemSettings({
         openAtLogin: true,
-        path: process.execPath,
+        path: process.execPath, // Jalankan aplikasi dari executable yang benar
     });
 }
 
