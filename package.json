@@ -50,7 +50,8 @@
         "win": {
             "target": "nsis",
             "icon": "assets/icon.ico",
-            "certificateSubjectName": "Pujin Studio"
+            "certificateSubjectName": "Pujin Studio",
+            "certificateFile": "D:\\Art\\Discord Rich Presence\\cert\\pujin-studio-cert.pfx"
         },
         "nsis": {
             "oneClick": false,
