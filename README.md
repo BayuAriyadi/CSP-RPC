@@ -32,30 +32,28 @@ Ikuti langkah-langkah di bawah ini untuk menginstal dan menjalankan CSP-RPC di k
 
 ## Cara Menggunakan Aplikasi
 
-### 1. **Mengubah Aktivitas (Details)**
+### 1. **Mengubah Aktivitas (Current Activity)**
 
-   - Di aplikasi, temukan kolom **Details**.
+   - Di aplikasi, temukan kolom **Current Activity**.
    - Masukkan deskripsi tentang apa yang sedang Anda lakukan, seperti "Sketching a new character" atau "Drawing a background".
    - Ini adalah informasi yang akan ditampilkan di Discord, memberi tahu teman-teman Anda apa yang sedang Anda kerjakan.
 
-### 2. **Mengubah Status (State)**
+### 2. **Mengubah Status (Your Status)**
 
-   - Di kolom **State**, masukkan informasi terkait status yang ingin Anda tampilkan. Misalnya: 
+   - Di kolom **Your Status**, masukkan informasi terkait status yang ingin Anda tampilkan. Misalnya: 
      - "Playing around with brushes"
      - "Working on a commission"
    - Status ini akan memberi tahu teman-teman Anda tentang aktivitas sosial Anda di Discord.
 
 ### 3. **Mengupdate Discord Rich Presence**
    
-   - Setelah Anda memasukkan **Details** dan **State**, klik tombol **Update** untuk memperbarui status Discord Anda.
+   - Setelah Anda memasukkan **Current Activity** dan **Your Status**, klik tombol **Update** untuk memperbarui status Discord Anda.
    - Setiap kali Anda ingin mengubah aktivitas atau status, cukup perbarui kolom yang relevan dan klik **Update** lagi.
 
 ---
 
 ## Tangkapan Layar
-![CSP-RPC Screenshot](./assets/screenshot.png)  
-**Tampilan antarmuka aplikasi CSP-RPC.**
-![CSP-RPC Screenshot](./assets/screenshot2.png)  
+![CSP-RPC Screenshot](./assets/Brosur.png)  
 
 ---
 
@@ -73,6 +71,8 @@ Jika Anda ingin memperbarui aplikasi ke versi terbaru, cukup unduh versi terbaru
 Jika Anda mengalami masalah atau memiliki pertanyaan, silakan buka **[Issue](https://github.com/BayuAriyadi/CSP-RPC/issues)** di repositori GitHub ini.
 
 Jika Anda tertarik untuk berkontribusi, silakan fork repositori ini dan kirim pull request dengan perubahan Anda!
+
+Jika anda ingin memberikan dukungan berupa donasi silahkan mampir ke **[Saweria](https://saweria.co/pujin)** saya.
 
 ---
 
